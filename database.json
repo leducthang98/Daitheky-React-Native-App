@@ -1,0 +1,49 @@
+{
+  "sellDatabase": [
+    {
+      "houseImageUri": "https://daitheky.r.worldssl.net/upload/photo/201912/20/624x476/9325_20191220152611_0.jpg",
+      "title": "Bán nhà 6 tầng ở phố Đội Cấn, Q Ba Đình, mặt tiền 5.9m, ô tô vào nhà, ngõ thông, lô góc, hơn 12 tỷ",
+      "description": "Khu vực: Đường Đội Cấn - Phường Ngọc Hà - Quận Ba Đình - Hà Nội"
+    },
+    {
+      "houseImageUri": "https://daitheky.r.worldssl.net/upload/photo/201912/20/624x476/9325_20191220152611_0.jpg",
+      "title": "Bán nhà 6 tầng ở phố Đội Cấn, Q Ba Đình, mặt tiền 5.9m, ô tô vào nhà, ngõ thông, lô góc, hơn 12 tỷ",
+      "description": "Khu vực: Đường Đội Cấn - Phường Ngọc Hà - Quận Ba Đình - Hà Nội"
+    },
+    {
+      "houseImageUri": "https://daitheky.r.worldssl.net/upload/photo/201912/20/624x476/9325_20191220152611_0.jpg",
+      "title": "Bán nhà 6 tầng ở phố Đội Cấn, Q Ba Đình, mặt tiền 5.9m, ô tô vào nhà, ngõ thông, lô góc, hơn 12 tỷ",
+      "description": "Khu vực: Đường Đội Cấn - Phường Ngọc Hà - Quận Ba Đình - Hà Nội"
+    },
+    {
+      "houseImageUri": "https://daitheky.r.worldssl.net/upload/photo/201912/20/624x476/9325_20191220152611_0.jpg",
+      "title": "Bán nhà 6 tầng ở phố Đội Cấn, Q Ba Đình, mặt tiền 5.9m, ô tô vào nhà, ngõ thông, lô góc, hơn 12 tỷ",
+      "description": "Khu vực: Đường Đội Cấn - Phường Ngọc Hà - Quận Ba Đình - Hà Nội"
+    },
+    {
+      "houseImageUri": "https://daitheky.r.worldssl.net/upload/photo/201912/20/624x476/9325_20191220152611_0.jpg",
+      "title": "Bán nhà 6 tầng ở phố Đội Cấn, Q Ba Đình, mặt tiền 5.9m, ô tô vào nhà, ngõ thông, lô góc, hơn 12 tỷ",
+      "description": "Khu vực: Đường Đội Cấn - Phường Ngọc Hà - Quận Ba Đình - Hà Nội"
+    },
+    {
+      "houseImageUri": "https://daitheky.r.worldssl.net/upload/photo/201912/20/624x476/9325_20191220152611_0.jpg",
+      "title": "Bán nhà 6 tầng ở phố Đội Cấn, Q Ba Đình, mặt tiền 5.9m, ô tô vào nhà, ngõ thông, lô góc, hơn 12 tỷ",
+      "description": "Khu vực: Đường Đội Cấn - Phường Ngọc Hà - Quận Ba Đình - Hà Nội"
+    },
+    {
+      "houseImageUri": "https://daitheky.r.worldssl.net/upload/photo/201912/20/624x476/9325_20191220152611_0.jpg",
+      "title": "Bán nhà 6 tầng ở phố Đội Cấn, Q Ba Đình, mặt tiền 5.9m, ô tô vào nhà, ngõ thông, lô góc, hơn 12 tỷ",
+      "description": "Khu vực: Đường Đội Cấn - Phường Ngọc Hà - Quận Ba Đình - Hà Nội"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
