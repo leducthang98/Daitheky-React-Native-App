@@ -4,7 +4,7 @@ import SellScreen from '../containers/MainScreens/sellScreen';
 import UserScreen from '../containers/MainScreens/userScreen';
 import RentScreen from '../containers/MainScreens/rentScreen';
 import ForumScreen from '../containers/MainScreens/forumScreen';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/FontAwesome'
 const MainTabNavigator = createBottomTabNavigator({
     Sell: {
         screen: SellScreen,

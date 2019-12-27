@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 import FormatDataSellScreen from './formatDataSellScreen';
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/FontAwesome'
 import { getSellData } from '../../actions/sellScreenAction'
 import { connect } from 'react-redux'
 
@@ -31,39 +31,11 @@ class SellScreen extends React.Component {
 
     }
     render() {
-        const DATA = [
-            {
-                houseImageUri: 'https://daitheky.r.worldssl.net/upload/photo/201912/20/624x476/9325_20191220152611_0.jpg',
-                title: 'Bán nhà 6 tầng ở phố Đội Cấn, Q Ba Đình, mặt tiền 5.9m, ô tô vào nhà, ngõ thông, lô góc, hơn 12 tỷ',
-                description: 'Khu vực: Đường Đội Cấn - Phường Ngọc Hà - Quận Ba Đình - Hà Nội'
-            },
-            {
-                houseImageUri: 'https://daitheky.r.worldssl.net/upload/photo/201912/20/624x476/9325_20191220144929_0.jpg',
-                title: 'Ở ngay, bán nhà ở phố Thụy Khuê, quận Tây Hồ, xây 5 tầng, hơn 2 tỷ!',
-                description: 'Khu vực: đường Thụy Khuê - Phường Bưởi - Quận Tây Hồ - Hà Nội'
-            },
-            {
-                houseImageUri: 'https://daitheky.r.worldssl.net/upload/photo/201912/20/624x476/9325_20191220111202_0.jpg',
-                title: 'Nhà đẹp, bán nhà ở đường Võ Chí Công, quận Tây Hồ, 55m2 x 5 tầng, ô tô, mặt tiền 4.8m, 4.2 tỷ!',
-                description: 'Khu vực: Đường Võ Chí Công - Phường Nhật Tân - Quận Tây Hồ - Hà Nội'
-            },
-            {
-                houseImageUri: 'https://daitheky.r.worldssl.net/upload/photo/201912/19/624x476/9735_20191219161140_0.jpg',
-                title: 'Đầu tư sinh lời cực tốt 40tr/ tháng, nhà Khâm Thiên, Đống Đa 6.5 tỷ.',
-                description: 'Khu vực: Phố Khâm Thiên - Phường Khâm Thiên - Quận Đống Đa - Hà Nội'
-            },
-            {
-                houseImageUri: 'https://daitheky.r.worldssl.net/upload/photo/201912/16/624x476/12965_20191216192922_0.jpg',
-                title: 'Bán nhà mặt phố Kim Đồng, quận Hoàng Mai, nhà 5 tầng, 21.5 tỷ',
-                description: 'Khu vực: Đường Kim Đồng - Phường Giáp Bát - Quận Hoàng Mai - Hà Nội'
-            },
-        ];
-
         return (
             <View style={styles.container}>
                 <View style={{ flexDirection: 'row', }}>
                     <Image style={styles.logoImage}
-
+                        source={require('AppDaiTheKy/image/logo.png')}
 
                     />
                     <View style={styles.search}>
@@ -85,7 +57,8 @@ class SellScreen extends React.Component {
                 />
 
                 <View style={{ flexDirection: 'row-reverse' }}>
-                    <View style={{ backgroundColor: '#F0F0CC' }}>
+                    <View style={{ backgroundColor: '#F0F0CC' }}
+                    >
                         <Text style={styles.buttonUpload}>
                             Đăng</Text>
                     </View>
@@ -220,7 +193,7 @@ let styles = StyleSheet.create({
 })
 const mapStateToProps = (store) => {
     return {
-        sellData:store.sellReducer.sellData
+        sellData: store.sellReducer.sellData
     }
 }
 const mapDispatchToProps = (dispatch) => {

@@ -39,7 +39,7 @@
   "comments": [
     {
       "id": 1,
-      "body": "some comment",
+      "body": ["some comment","Image"],
       "postId": 1
     }
   ],

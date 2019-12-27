@@ -22,27 +22,34 @@ function pressFunction() {
 }
 
 
-export default function FormatDataSellScreen(props) {
-    
-    return (
-        <TouchableOpacity
+class FormatDataSellScreen extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
 
-            style={styles.container}
-        >
-            <Image style={styles.image}
-               source={{ uri:props.houseImageUri }}
-                
-            />
-            <View style={styles.viewData}>
-                <View style={styles.title}>
-                    <Text style = {{ fontWeight: 'bold',fontSize:15}}>{props.title}</Text>
+        }
+    }
+    render() {
+        return (
+            <TouchableOpacity
+                style={styles.container}
+                onPress={() => this.props.navigation.navigate('ClickSellScreen')}
+            >
+                <Image style={styles.image}
+                    source={{ uri: this.props.houseImageUri }}
+
+                />
+                <View style={styles.viewData}>
+                    <View style={styles.title}>
+                        <Text style={{ fontWeight: 'bold', fontSize: 15 }}>{this.props.title}</Text>
+                    </View>
+                    <View style={styles.description}>
+                        <Text style={{ color: 'gray' }}>{this.props.description}</Text>
+                    </View>
                 </View>
-                <View style={styles.description}>
-                    <Text style = {{color:'gray'}}>{props.description}</Text>
-                </View>
-            </View>
-        </TouchableOpacity>
-    )
+            </TouchableOpacity>
+        )
+    }
 }
 const styles = StyleSheet.create({
     container: {
@@ -66,10 +73,11 @@ const styles = StyleSheet.create({
     },
     title: {
         flex: 1,
-        
+
     },
     description: {
         flex: 1,
-        marginTop:15,
+        marginTop: 15,
     }
 })
+export default FormatDataSellScreen;

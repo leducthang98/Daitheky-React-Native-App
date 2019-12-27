@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import logger from 'redux-logger';
 import { createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
+import InitDataSellScreen from './src/containers/MainScreens/initDataSellScreen'
 import {
   SafeAreaView,
   StyleSheet,
@@ -26,10 +27,11 @@ const App = () => {
         <RootNavigator />
       </View>
     </Provider>
+    // <InitDataSellScreen />  
   );
 };
 const containerW = Dimensions.get('window').width;
-const containerH = Dimensions.get('window').height/1.04;
+const containerH = Dimensions.get('window').height / 1.04;
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'black',
