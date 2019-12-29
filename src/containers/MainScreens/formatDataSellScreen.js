@@ -33,18 +33,20 @@ class FormatDataSellScreen extends Component {
         return (
             <TouchableOpacity
                 style={styles.container}
-                onPress={() => this.props.navigation.navigate('ClickSellScreen')}
+                onPress={() => this.props.navigation.navigate('ClickSellScreen', {
+                    data: this.props.data
+                })}
             >
                 <Image style={styles.image}
-                    source={{ uri: this.props.houseImageUri }}
+                    source={{ uri: this.props.data.images[0] }}
 
                 />
                 <View style={styles.viewData}>
                     <View style={styles.title}>
-                        <Text style={{ fontWeight: 'bold', fontSize: 15 }}>{this.props.title}</Text>
+                        <Text style={{ fontWeight: 'bold', fontSize: 15 }}>{this.props.data.title}</Text>
                     </View>
                     <View style={styles.description}>
-                        <Text style={{ color: 'gray' }}>{this.props.description}</Text>
+                        <Text style={{ color: 'gray' }}>{this.props.data.location}</Text>
                     </View>
                 </View>
             </TouchableOpacity>

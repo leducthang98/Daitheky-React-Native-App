@@ -16,14 +16,16 @@ import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { getSellData } from '../../actions/sellScreenAction'
 import { connect } from 'react-redux'
-
+import BottomView from '../bottomView'
+import RNPickerSelect from 'react-native-picker-select'
 let width = Dimensions.get('window').width;
 let height = Dimensions.get('window').height;
 class SellScreen extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: []
+            data: [],
+            filter: undefined
         }
     }
     componentDidMount() {
@@ -31,25 +33,44 @@ class SellScreen extends React.Component {
 
     }
     render() {
+        let dataSell = this.props.sellData
+        let dataRender
+        let count = 0
+        if (dataSell) {
+            dataRender = dataSell.map((data, index) => {
+                data = dataSell[dataSell.length - 1 - index];
+                count = count + 1;
+                return (
+                    <FormatDataSellScreen
+                        {...this.props}
+                        data={data}
+                    />
+                )
+            })
+
+
+        }
+
         return (
-            <View style={styles.container}>
+            <ScrollView style={styles.container}>
                 <View style={{ flexDirection: 'row', }}>
                     <Image style={styles.logoImage}
                         source={require('AppDaiTheKy/image/logo.png')}
+                    />
+                    <TextInput
+                        style={styles.search}
+                        placeholder="Tìm kiếm"
+                        placeholderTextColor="gray"
+                        justifyContent='center'
 
                     />
-                    <View style={styles.search}>
-
-                        <Icon name="search" size={24} color="black" style={styles.searchIcon}
-                        />
-                    </View>
                 </View>
-                <TextInput
+                {/* <TextInput
                     style={styles.title}
                     placeholder="Tiêu đề"
                     placeholderTextColor="gray"
-                ></TextInput>
-                <TextInput
+                ></TextInput> */}
+                {/* <TextInput
                     style={styles.content}
                     placeholder="Nhập nội dung..."
                     placeholderTextColor="gray"
@@ -63,29 +84,60 @@ class SellScreen extends React.Component {
                             Đăng</Text>
                     </View>
                     <Icon name="image" size={32} color="#646464" style={styles.addImage} />
+                </View> */}
+                <View style={{ flexDirection: 'row' }}>
+                    <Text style={{ marginTop: 10, fontSize: 15, color: 'green', fontWeight: 'bold',marginLeft:4 }}>Tìm thấy {count} kết quả</Text>
+
+                    <RNPickerSelect
+                        style={{ ...pickerSelectStyles }}
+                        placeholder={{
+                            label: 'Sắp xếp',
+                            value: null,
+                            color: 'gray'
+                        }}
+
+                        onValueChange={(value) => {
+                            this.setState({
+                                filter: value,
+                            });
+
+                        }}
+                        items={[
+                            { label: 'Thông thường', value: 'normal',color:'green' },
+                            { label: 'Ngày đăng', value: 'date',color:'green' },
+                            { label: 'Giá tăng', value: 'priceUp',color:'green' },
+                            { label: 'Giá giảm', value: 'priceDown',color:'green' },
+                            { label: 'Diện tích tăng', value: 'acreageUp',color:'green' },
+                            { label: 'Diện tích giảm', value: 'acreageDown',color:'green' },
+                        ]}
+                    />
                 </View>
-                {/* BÀI ĐĂNG Ở CHỖ NÀY */}
-                <FlatList
-                    style={styles.data}
-                    keyExtractor={item => item.id}
-                    data={this.props.sellData}
-                    renderItem={({ item }) =>
-                        <FormatDataSellScreen
-                            {...this.props}
-                            id={item.id}
-                            houseImageUri={item.houseImageUri}
-                            title={item.title}
-                            description={item.description}
-                        />
-                    }
-
-                />
+                {dataRender}
 
 
-            </View>
+            </ScrollView>
         );
     }
 }
+const pickerSelectStyles = StyleSheet.create({
+    viewContainer: {
+        marginTop: 10,
+        backgroundColor: 'green',
+        color: 'white',
+        borderRadius: 11,
+        width: 100,
+        height: 25,
+        justifyContent: 'center',
+        paddingLeft: 10,
+        marginLeft: 110
+
+    },
+    headlessAndroidContainer: {
+        backgroundColor: 'black',
+        flex: 1,
+
+    }
+});
 let styles = StyleSheet.create({
     container: {
         width: width,
@@ -156,7 +208,7 @@ let styles = StyleSheet.create({
     logoImage: {
         width: 130,
         height: 40,
-        marginLeft: -15,
+        marginLeft: -24,
         marginTop: 4,
         resizeMode: 'contain',
         // marginTop: '20%',
@@ -165,10 +217,10 @@ let styles = StyleSheet.create({
     },
     search: {
         backgroundColor: '#C3BABA',
-        width: 36,
-        height: 36,
-        marginLeft: 198,
-        borderRadius: 18,
+        width: width * 0.7,
+        height: 30,
+        marginLeft: -15,
+        borderRadius: 15,
         marginTop: 8,
     },
     searchIcon: {
@@ -193,7 +245,7 @@ let styles = StyleSheet.create({
 })
 const mapStateToProps = (store) => {
     return {
-        sellData: store.sellReducer.sellData
+        sellData: store.sellReducer.sellData // state sellReducer = this.props
     }
 }
 const mapDispatchToProps = (dispatch) => {

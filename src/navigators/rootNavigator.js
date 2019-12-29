@@ -20,7 +20,14 @@ const Navigator = createStackNavigator({
   ClickSellScreen: {
     screen: InitDataSellScreen,
     navigationOptions: {
-      header: null
+      title: "Chi tiết",
+      headerStyle: {
+        backgroundColor: '#f6511e',
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
     },
   }
 },

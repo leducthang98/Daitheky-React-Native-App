@@ -1,5 +1,6 @@
 import React from 'react';
 import BottomView from '../bottomView';
+import { Table, TableWrapper, Row, Rows, Col } from 'react-native-table-component';
 import {
     SafeAreaView,
     StyleSheet,
@@ -18,27 +19,28 @@ class InitDataSellSrceen extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-           
+
         }
     }
     render() {
-        const images = [
-            'https://daitheky.r.worldssl.net/upload/photo/201912/20/624x476/9325_20191220152611_0.jpg',
-            'https://daitheky.r.worldssl.net/upload/photo/201912/16/624x476/12965_20191216192922_0.jpg',
-            'https://daitheky.r.worldssl.net/upload/photo/201912/20/624x476/9325_20191220111202_0.jpg',
-        ]
+        const { params } = this.props.navigation.state
+        const images = params.data.images
+        const tableTypeTitle = ['Loại tin rao', 'Hướng nhà', 'Hướng ban công', 'Số phòng', 'Đường vào', 'Mặt tiền', 'Số tầng', 'Số toilet']
+        const tableTypeData = [params.data.type, params.data.houseDirection, params.data.balconyDirection, params.data.rooms, params.data.wayIn, params.data.streetFace, params.data.floors, params.data.toilets]
+
+        const tableInfoTitle = ['Tên', 'Địa chỉ', 'Tỉnh thành', 'Điện thoại', 'Email']
+        const tableInfoData = [params.data.sender, params.data.senderAddress, params.data.senderProvince, params.data.senderPhone, params.data.senderEmail]
         return (
             <ScrollView style={styles.container}>
-                <Text style={styles.title}>Bán nhà mặt tiền ở Hoàng Mai</Text>
-                <Text style={styles.location}>Địa điểm: Hoàng Mai, Quận Hai Bà Trưng, Hà Nội</Text>
+                <Text style={styles.title}>{params.data.title}</Text>
+                <Text style={styles.location}>Địa điểm:     {params.data.location}</Text>
                 <View style={{ flexDirection: 'row', marginTop: 7, marginLeft: 6 }}>
-                    <Text style={{ color: 'gray' }}>Giá: 12.2 Tỷ</Text>
-                    <Text style={{ marginLeft: width - width / 1.4, color: 'gray' }}>Diện tích: 40 m2</Text>
+                    <Text style={{ color: 'gray' }}>Giá:{params.data.price}</Text>
+                    <Text style={{ marginLeft: width - width / 1.4, color: 'gray' }}>Ngày đăng tin:{params.data.timeStamp}</Text>
                 </View>
-                <View style={{ flexDirection: 'row', marginLeft: 6, marginTop: 5 }}>
-                    <Text style={{ color: 'gray' }}>                     </Text>
-                    <Text style={{ marginLeft: width - width / 1.4, color: 'gray' }}>Ngày đăng tin: 27/12/2019</Text>
-                </View>
+                <View style={{ flexDirection: 'row', marginLeft: 6, marginTop: 5 }}></View>
+        <Text style={{ marginLeft: 6, color: 'gray' }}>Diện tích:{params.data.acreage}</Text>
+
                 <View
                     style={{
                         marginTop: 20,
@@ -47,30 +49,7 @@ class InitDataSellSrceen extends React.Component {
                     }}
                 />
                 <Text style={{ marginTop: 5, fontSize: 20, marginLeft: 3, fontWeight: 'bold' }}>Thông tin mô tả</Text>
-                <Text style={styles.description}>+ Chủ nhà định sang Mỹ định cư nên cần bán gấp nhà Phố 8/3, quận Hai Bà Trưng. Diện tích 40m2, 5 tầng, mặt tiền 4m. giá yêu thương chỉ 3.1 tỷ có ngay nhà thuộc khu víp quận Hai Bà Trưng.
-+ Nhà nằm tại vị trí đẹp nhất phố 8/3, cách đường 8/3 hơn 100m, ngõ xe ba gác tránh xe máy, thông ra Ngõ Quỳnh. Trước cửa có khoảng ngõ rộng để được nhiều xe máy.
-+ Khu vực đang phát triển từng ngày, rất hiếm nhà bán, an ninh đảm bảo, đời sống dân trí cao, hàng xóm hiền lành thân thiện. Nhà nằm tại trung tâm quận Hai Bà Trưng nên hưởng trọn vẹn các tiện ích như TTTM, khu vui chơi giải trí, trường học các cấp.
-+ Nhà chủ tự thiết kế rất chắc chắn, kiên cố. Xây trên diện tích 40m2, 5 tầng, mặt tiền 4m. Tổng 4 PN+WC. Hiện tại chủ mới sơn sửa lại để người mua chỉ việc đến ở luôn.
-+ Sổ đỏ chính chủ, sẵn sàng giao dịch. Giá 3.1 tỷ, có thương lượng.
-LH: Mr CHUNG, 0978144961. Chuyên BĐS thổ cư Hà Nội, tư vấn hỗ trợ các thủ tục pháp lý nhanh gọn dễ dàng. Khách xem nhà không mất bất kì khoản phí dịch vụ nào.
-                </Text>
-                {/* <Image style={{ width: width, height: 350, marginTop: 10 }}
-                    source={{ uri: 'https://daitheky.r.worldssl.net/upload/photo/201912/20/624x476/9325_20191220152611_0.jpg' }}
-                /> */}
-                {/* <FlatList
-                    keyExtractor={item => item.id}
-                    data={images}
-                    renderItem={({ item }) =>
-                        <View>
-                            <Image
-                                style={{ width: width, height: 350, marginTop: 20 }}
-                                source={{ uri: item }}
-                            />
-                        </View>
-                    }
-                >
-
-                </FlatList> */}
+                <Text style={styles.description}>{params.data.description}</Text>
                 <Text style={{ marginTop: 5, fontSize: 20, marginLeft: 3, fontWeight: 'bold' }}>Hình ảnh</Text>
                 <ScrollView
                     horizontal
@@ -97,7 +76,28 @@ LH: Mr CHUNG, 0978144961. Chuyên BĐS thổ cư Hà Nội, tư vấn hỗ trợ
                         </View>
                     ))}
                 </View>
-                <Text style={{ marginTop: 5, fontSize: 20, marginLeft: 3, fontWeight: 'bold' }}>Liên hệ</Text>
+                <Text style={{ marginTop: 15, fontSize: 20, marginLeft: 3, fontWeight: 'bold' }}>Đặc điểm bất động sản</Text>
+                <View style={styles.table}>
+                    <Table borderStyle={{ borderWidth: 1 }}>
+
+                        <TableWrapper style={styles.wrapperTable}>
+                            <Col data={tableTypeTitle} style={styles.titleTable} heightArr={[28, 28]} textStyle={styles.textTable1} />
+                            <Col data={tableTypeData} style={styles.titleData} heightArr={[28, 28]} textStyle={styles.textTable2} />
+                        </TableWrapper>
+                    </Table>
+                </View>
+
+                <Text style={{ marginTop: 15, fontSize: 20, marginLeft: 3, fontWeight: 'bold' }}>Liên hệ</Text>
+                <View style={styles.table}>
+                    <Table borderStyle={{ borderWidth: 1 }}>
+
+                        <TableWrapper style={styles.wrapperTable}>
+                            <Col data={tableInfoTitle} style={styles.titleTable} heightArr={[28, 28]} textStyle={styles.textTable1} />
+                            <Col data={tableInfoData} style={styles.titleData} heightArr={[28, 28]} textStyle={styles.textTable2} />
+                        </TableWrapper>
+                    </Table>
+                </View>
+
                 <BottomView />
             </ScrollView >
         );
@@ -127,9 +127,9 @@ let styles = StyleSheet.create({
         fontStyle: ('normal', 'italic'),
     },
     description: {
-        fontSize: 15,
+        fontSize: 17,
         color: '#46135f',
-        fontStyle: ('normal', 'italic'),
+
     },
     circleDiv: {
         marginTop: -15,
@@ -146,6 +146,42 @@ let styles = StyleSheet.create({
         borderRadius: 3,
         margin: 5,
         backgroundColor: "#fff"
+    },
+    table: {
+        flex: 1,
+        padding: 16,
+        paddingTop: 15,
+        backgroundColor: '#fafad2',
+    },
+    headTable: {
+        height: 40,
+        backgroundColor: '#fafad2'
+    },
+    wrapperTable: {
+        flexDirection: 'row'
+    },
+    titleTable: {
+        flex: 0.65,
+        backgroundColor: '#fafad2',
+
+    },
+    titleData: {
+        flex: 1,
+        backgroundColor: '#fafad2',
+
+    },
+    rowTable: {
+        height: 28
+    },
+    textTable1: {
+        marginLeft: 4,
+        fontWeight: 'bold',
+        textAlign: 'left',
+        color: 'blue'
+    },
+    textTable2: {
+        marginLeft: 4,
+        textAlign: 'left'
     }
 
 
