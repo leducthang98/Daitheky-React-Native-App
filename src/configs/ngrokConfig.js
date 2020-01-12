@@ -1,2 +1,2 @@
-const link = 'https://ab44ea40.ngrok.io';
+const link = 'https://6bb93811.ngrok.io';
 export { link };

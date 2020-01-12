@@ -23,11 +23,11 @@ class InitDataSellSrceen extends React.Component {
         }
     }
     render() {
+        const link = 'https://daitheky.r.worldssl.net';
         const { params } = this.props.navigation.state
         const images = params.data.images
         const tableTypeTitle = ['Loại tin rao', 'Hướng nhà', 'Hướng ban công', 'Số phòng', 'Đường vào', 'Mặt tiền', 'Số tầng', 'Số toilet']
         const tableTypeData = [params.data.type, params.data.houseDirection, params.data.balconyDirection, params.data.rooms, params.data.wayIn, params.data.streetFace, params.data.floors, params.data.toilets]
-
         const tableInfoTitle = ['Tên', 'Địa chỉ', 'Tỉnh thành', 'Điện thoại', 'Email']
         const tableInfoData = [params.data.sender, params.data.senderAddress, params.data.senderProvince, params.data.senderPhone, params.data.senderEmail]
         return (
@@ -39,7 +39,7 @@ class InitDataSellSrceen extends React.Component {
                     <Text style={{ marginLeft: width - width / 1.4, color: 'gray' }}>Ngày đăng tin:{params.data.timeStamp}</Text>
                 </View>
                 <View style={{ flexDirection: 'row', marginLeft: 6, marginTop: 5 }}></View>
-        <Text style={{ marginLeft: 6, color: 'gray' }}>Diện tích:{params.data.acreage}</Text>
+                <Text style={{ marginLeft: 6, color: 'gray' }}>Diện tích:{params.data.acreage}</Text>
 
                 <View
                     style={{
@@ -56,25 +56,37 @@ class InitDataSellSrceen extends React.Component {
                     pagingEnabled
                     style={{ borderWidth: 2, borderColor: 'gray', marginTop: 10 }}
                 >
-                    {images.map(image => (
+                    {images.filter(function (img) {
+                        if (img == "" || img == null) {
+                            return false;
+                        }
+                        return true;
+                    }).map(image => (
                         <View>
                             <Image
                                 key={image}
-                                source={{ uri: image }}
+                                source={{ uri: link + image }}
                                 style={{ width: width, height: 350, }}
                             />
                         </View>
                     ))}
                 </ScrollView>
                 <View style={styles.circleDiv}>
-                    {images.map(image => (
-                        <View
-                            key={image}
-                            style={[styles.whiteCircle]}
-                        >
+                    {images.filter(function (img) {
+                        if (img == "" || img == null) {
+                            return false;
+                        }
+                        return true;
+                    }).map(image => {
+                        return (
+                            <View
+                                key={image}
+                                style={[styles.whiteCircle]}
+                            >
 
-                        </View>
-                    ))}
+                            </View>
+                        )
+                    })}
                 </View>
                 <Text style={{ marginTop: 15, fontSize: 20, marginLeft: 3, fontWeight: 'bold' }}>Đặc điểm bất động sản</Text>
                 <View style={styles.table}>

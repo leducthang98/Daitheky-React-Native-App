@@ -5,13 +5,14 @@ import UserScreen from '../containers/MainScreens/userScreen';
 import RentScreen from '../containers/MainScreens/rentScreen';
 import ForumScreen from '../containers/MainScreens/forumScreen';
 import Icon from 'react-native-vector-icons/FontAwesome'
+import { Image } from 'react-native';
 const MainTabNavigator = createBottomTabNavigator({
     Sell: {
         screen: SellScreen,
         navigationOptions: {
             tabBarLabel: "Mua/bán",
             tabBarIcon: ({ tintColor }) => (
-                <Icon name="home" size={30} color="#7B8184" />
+                <Icon name="dollar" size={26} color="#7B8184" />
             )
         },
     },

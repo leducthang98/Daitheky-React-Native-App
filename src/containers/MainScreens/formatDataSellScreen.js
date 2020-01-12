@@ -30,6 +30,9 @@ class FormatDataSellScreen extends Component {
         }
     }
     render() {
+        const link = 'https://daitheky.r.worldssl.net';
+        // console.log(link+this.props.data.images.img[0])
+        console.log('f:'+this.props.data.images[6])
         return (
             <TouchableOpacity
                 style={styles.container}
@@ -38,7 +41,7 @@ class FormatDataSellScreen extends Component {
                 })}
             >
                 <Image style={styles.image}
-                    source={{ uri: this.props.data.images[0] }}
+                    source={{ uri: link + this.props.data.images[1] }}
 
                 />
                 <View style={styles.viewData}>

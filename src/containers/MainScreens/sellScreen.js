@@ -38,7 +38,47 @@ class SellScreen extends React.Component {
         let count = 0
         if (dataSell) {
             dataRender = dataSell.map((data, index) => {
-                data = dataSell[dataSell.length - 1 - index];
+                let dataOrigin = dataSell[index];
+                var imgs = dataOrigin.AlbumMedium.split('|.');
+                var type;
+                switch(dataOrigin.HangXe){
+                    case '450':
+                        type = "Chung cư"
+                        break;
+                    case '457':
+                        type = "Nhà riêng"
+                        break;
+                    case '553':
+                        type = "Biệt thự liền kề"
+                        break;
+                    case '554':
+                        type = "Nhà mặt phố"
+                        break;
+                }
+                var data = {
+                    id: dataOrigin.IDMaTin,
+                    title: dataOrigin.TieuDe,
+                    location: dataOrigin.DongXe,
+                    price: dataOrigin.GiaTien,
+                    acreage: dataOrigin.NgoaiThat,
+                    timeStamp: dataOrigin.NgayDang,
+                    description: dataOrigin.ThongTinMota,
+                    images: imgs,
+                    type: type,
+                    houseDirection: dataOrigin.NoiThat,
+                    rooms: dataOrigin.HeThongNapNhienLieu,
+                    wayIn: dataOrigin.DanDong,
+                    streetFace: dataOrigin.HopSo,
+                    floors: dataOrigin.NhienLieu,
+                    toilets: dataOrigin.MucTieuThu,
+                    // sender: dataOrigin.contact.HoVaTen,
+                    // senderAddress: dataOrigin.contact.DiaChi,
+                    // senderProvince: null,
+                    // senderPhone: dataOrigin.contact.DienThoai,
+                    // senderEmail: dataOrigin.contact.Email,
+
+                }
+
                 count = count + 1;
                 return (
                     <FormatDataSellScreen
@@ -65,28 +105,8 @@ class SellScreen extends React.Component {
 
                     />
                 </View>
-                {/* <TextInput
-                    style={styles.title}
-                    placeholder="Tiêu đề"
-                    placeholderTextColor="gray"
-                ></TextInput> */}
-                {/* <TextInput
-                    style={styles.content}
-                    placeholder="Nhập nội dung..."
-                    placeholderTextColor="gray"
-                    multiline={true}
-                />
-
-                <View style={{ flexDirection: 'row-reverse' }}>
-                    <View style={{ backgroundColor: '#F0F0CC' }}
-                    >
-                        <Text style={styles.buttonUpload}>
-                            Đăng</Text>
-                    </View>
-                    <Icon name="image" size={32} color="#646464" style={styles.addImage} />
-                </View> */}
                 <View style={{ flexDirection: 'row' }}>
-                    <Text style={{ marginTop: 10, fontSize: 15, color: 'green', fontWeight: 'bold',marginLeft:4 }}>Tìm thấy {count} kết quả</Text>
+                    <Text style={{ marginTop: 10, fontSize: 15, color: 'green', fontWeight: '800', marginLeft: 4, fontStyle: ('normal', 'italic') }}>Tìm thấy {count} kết quả.</Text>
 
                     <RNPickerSelect
                         style={{ ...pickerSelectStyles }}
@@ -103,12 +123,12 @@ class SellScreen extends React.Component {
 
                         }}
                         items={[
-                            { label: 'Thông thường', value: 'normal',color:'green' },
-                            { label: 'Ngày đăng', value: 'date',color:'green' },
-                            { label: 'Giá tăng', value: 'priceUp',color:'green' },
-                            { label: 'Giá giảm', value: 'priceDown',color:'green' },
-                            { label: 'Diện tích tăng', value: 'acreageUp',color:'green' },
-                            { label: 'Diện tích giảm', value: 'acreageDown',color:'green' },
+                            { label: 'Thông thường', value: 'normal', color: 'green' },
+                            { label: 'Ngày đăng', value: 'date', color: 'green' },
+                            { label: 'Giá tăng', value: 'priceUp', color: 'green' },
+                            { label: 'Giá giảm', value: 'priceDown', color: 'green' },
+                            { label: 'Diện tích tăng', value: 'acreageUp', color: 'green' },
+                            { label: 'Diện tích giảm', value: 'acreageDown', color: 'green' },
                         ]}
                     />
                 </View>

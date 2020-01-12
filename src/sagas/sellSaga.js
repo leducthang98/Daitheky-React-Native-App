@@ -2,8 +2,8 @@ import { put, takeEvery } from 'redux-saga/effects'
 import getSellData from '../fetchAPIs/getSellDataAPI'
 function* sellSagaFunction(action) {
     try {
-        let sellData = yield getSellData();
-
+        let sellDataOrigin = yield getSellData();
+        let sellData =sellDataOrigin.dulieu
         yield put({
             type: 'GET_SELLDATA_SUCCESS',
             payload: { sellData }
@@ -11,7 +11,7 @@ function* sellSagaFunction(action) {
     } catch{
         yield put({
             type: 'GET_SELLDATA_FAIL',
-            payload: { }
+            payload: {}
         })
     }
 }
