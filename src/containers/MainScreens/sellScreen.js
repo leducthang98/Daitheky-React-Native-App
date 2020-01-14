@@ -4,6 +4,7 @@ import {
     StyleSheet,
     ScrollView,
     FlatList,
+    TouchableOpacity,
     View,
     Text,
     Image,
@@ -12,7 +13,7 @@ import {
     Button
 } from 'react-native';
 import FormatDataSellScreen from './formatDataSellScreen';
-import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
+import { TextInput } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { getSellData } from '../../actions/sellScreenAction'
 import { connect } from 'react-redux'
@@ -25,23 +26,45 @@ class SellScreen extends React.Component {
         super(props);
         this.state = {
             data: [],
-            filter: undefined
+            filter: undefined,
+            pageIndex: 1,
         }
     }
     componentDidMount() {
-        this.props.getSellData();
+        this.props.getSellData(this.state.pageIndex);
+
+    }
+    async nextButton() {
+        await this.setState({
+            pageIndex: this.state.pageIndex + 1,
+        });
+        this.props.getSellData(this.state.pageIndex);
+
+
+    }
+    async prevButton() {
+        if (this.state.pageIndex == 1) {
+            await this.setState({
+                pageIndex: 1,
+            });
+        } else {
+            await this.setState({
+                pageIndex: this.state.pageIndex - 1,
+            });
+            this.props.getSellData(this.state.pageIndex);
+        }
 
     }
     render() {
-        let dataSell = this.props.sellData
+
         let dataRender
         let count = 0
-        if (dataSell) {
-            dataRender = dataSell.map((data, index) => {
-                let dataOrigin = dataSell[index];
+        if (this.props.sellData) {
+            dataRender = this.props.sellData.map((data, index) => {
+                let dataOrigin = this.props.sellData[index];
                 var imgs = dataOrigin.AlbumMedium.split('|.');
                 var type;
-                switch(dataOrigin.HangXe){
+                switch (dataOrigin.HangXe) {
                     case '450':
                         type = "Chung cư"
                         break;
@@ -55,29 +78,53 @@ class SellScreen extends React.Component {
                         type = "Nhà mặt phố"
                         break;
                 }
-                var data = {
-                    id: dataOrigin.IDMaTin,
-                    title: dataOrigin.TieuDe,
-                    location: dataOrigin.DongXe,
-                    price: dataOrigin.GiaTien,
-                    acreage: dataOrigin.NgoaiThat,
-                    timeStamp: dataOrigin.NgayDang,
-                    description: dataOrigin.ThongTinMota,
-                    images: imgs,
-                    type: type,
-                    houseDirection: dataOrigin.NoiThat,
-                    rooms: dataOrigin.HeThongNapNhienLieu,
-                    wayIn: dataOrigin.DanDong,
-                    streetFace: dataOrigin.HopSo,
-                    floors: dataOrigin.NhienLieu,
-                    toilets: dataOrigin.MucTieuThu,
-                    // sender: dataOrigin.contact.HoVaTen,
-                    // senderAddress: dataOrigin.contact.DiaChi,
-                    // senderProvince: null,
-                    // senderPhone: dataOrigin.contact.DienThoai,
-                    // senderEmail: dataOrigin.contact.Email,
+                console.log("Page " + this.state.pageIndex + ", " + "num " + index + ": " + dataOrigin.contact)
 
+                var data
+                if (dataOrigin.contact == null || dataOrigin.contact == "") {
+                    var data = {
+                        id: dataOrigin.IDMaTin,
+                        title: dataOrigin.TieuDe,
+                        location: dataOrigin.DongXe,
+                        price: dataOrigin.GiaTien,
+                        acreage: dataOrigin.NgoaiThat,
+                        timeStamp: dataOrigin.NgayDang,
+                        description: dataOrigin.ThongTinMota,
+                        images: imgs,
+                        type: type,
+                        houseDirection: dataOrigin.NoiThat,
+                        rooms: dataOrigin.HeThongNapNhienLieu,
+                        wayIn: dataOrigin.DanDong,
+                        streetFace: dataOrigin.HopSo,
+                        floors: dataOrigin.NhienLieu,
+                        toilets: dataOrigin.MucTieuThu,
+                    }
+                } else {
+                    var contactToJSON = JSON.parse(dataOrigin.contact)
+                    var data = {
+                        id: dataOrigin.IDMaTin,
+                        title: dataOrigin.TieuDe,
+                        location: dataOrigin.DongXe,
+                        price: dataOrigin.GiaTien,
+                        acreage: dataOrigin.NgoaiThat,
+                        timeStamp: dataOrigin.NgayDang,
+                        description: dataOrigin.ThongTinMota,
+                        images: imgs,
+                        type: type,
+                        houseDirection: dataOrigin.NoiThat,
+                        rooms: dataOrigin.HeThongNapNhienLieu,
+                        wayIn: dataOrigin.DanDong,
+                        streetFace: dataOrigin.HopSo,
+                        floors: dataOrigin.NhienLieu,
+                        toilets: dataOrigin.MucTieuThu,
+                        sender: contactToJSON.HoVaTen,
+                        senderAddress: contactToJSON.DiaChi,
+                        senderProvince: "",
+                        senderPhone: contactToJSON.DienThoai,
+                        senderEmail: contactToJSON.Email,
+                    }
                 }
+
 
                 count = count + 1;
                 return (
@@ -105,8 +152,8 @@ class SellScreen extends React.Component {
 
                     />
                 </View>
-                <View style={{ flexDirection: 'row' }}>
-                    <Text style={{ marginTop: 10, fontSize: 15, color: 'green', fontWeight: '800', marginLeft: 4, fontStyle: ('normal', 'italic') }}>Tìm thấy {count} kết quả.</Text>
+                <View style={{ flexDirection: 'row', marginBottom: 7 }}>
+        <Text style={{ marginTop: 10, fontSize: 15, color: 'green', fontWeight: '800', marginLeft: 4, fontStyle: ('normal', 'italic') }}>Page {this.state.pageIndex} of {parseInt(this.props.countSellData/15)}                 </Text>
 
                     <RNPickerSelect
                         style={{ ...pickerSelectStyles }}
@@ -133,9 +180,21 @@ class SellScreen extends React.Component {
                     />
                 </View>
                 {dataRender}
-
-
-            </ScrollView>
+                <View style={styles.pagination}>
+                    <TouchableOpacity >
+                        <Icon name="chevron-left" size={20} color="black"
+                            style={styles.pgnButtonPrev}
+                            onPress={() => this.prevButton()}
+                        />
+                    </TouchableOpacity>
+                    <TouchableOpacity >
+                        <Icon name="chevron-right" size={20} color="black"
+                            style={styles.pgnButtonNext}
+                            onPress={() => this.nextButton()}
+                        />
+                    </TouchableOpacity>
+                </View>
+            </ScrollView >
         );
     }
 }
@@ -149,7 +208,7 @@ const pickerSelectStyles = StyleSheet.create({
         height: 25,
         justifyContent: 'center',
         paddingLeft: 10,
-        marginLeft: 110
+        marginLeft: 70
 
     },
     headlessAndroidContainer: {
@@ -162,7 +221,7 @@ let styles = StyleSheet.create({
     container: {
         width: width,
         height: height,
-        backgroundColor: '#F0F0CC',
+        backgroundColor: '#fafafe',
     },
     searchBar: {
         width: width / 1.05,
@@ -233,7 +292,7 @@ let styles = StyleSheet.create({
         resizeMode: 'contain',
         // marginTop: '20%',
         // marginLeft: '25%',
-        backgroundColor: '#F0F0CC'
+        backgroundColor: '#fafafe'
     },
     search: {
         backgroundColor: '#C3BABA',
@@ -259,19 +318,54 @@ let styles = StyleSheet.create({
         borderWidth: 0.3,
         borderColor: 'gray'
 
-    }
+    },
+    pagination: {
+        width: '100%',
+        height: 40,
+        backgroundColor: '#ede6e6',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+
+    },
+    pgnButtonPrev: {
+        width: 32,
+        height: 32,
+        borderRadius: 30,
+        borderWidth: 0.5,
+        borderColor: 'black',
+        marginLeft: 10,
+        backgroundColor: '#fafafe',
+        paddingTop: 6,
+        paddingLeft: 7,
+
+    },
+    pgnButtonNext: {
+        width: 32,
+        height: 32,
+        borderRadius: 30,
+        borderWidth: 0.5,
+        borderColor: 'black',
+        marginLeft: 10,
+        backgroundColor: '#fafafe',
+        paddingTop: 6,
+        paddingLeft: 9,
+
+    },
+
 
 
 })
 const mapStateToProps = (store) => {
     return {
-        sellData: store.sellReducer.sellData // state sellReducer = this.props
+        sellData: store.sellReducer.sellData,
+        countSellData: store.sellReducer.countSellData
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        getSellData: () => {
-            dispatch(getSellData())
+        getSellData: (index) => {
+            dispatch(getSellData(index))
         },
 
     }

@@ -31,8 +31,6 @@ class FormatDataSellScreen extends Component {
     }
     render() {
         const link = 'https://daitheky.r.worldssl.net';
-        // console.log(link+this.props.data.images.img[0])
-        console.log('f:'+this.props.data.images[6])
         return (
             <TouchableOpacity
                 style={styles.container}
@@ -49,7 +47,7 @@ class FormatDataSellScreen extends Component {
                         <Text style={{ fontWeight: 'bold', fontSize: 15 }}>{this.props.data.title}</Text>
                     </View>
                     <View style={styles.description}>
-                        <Text style={{ color: 'gray' }}>{this.props.data.location}</Text>
+                        <Text style={{ color: 'gray' }}  maxLength={0}>{this.props.data.location}</Text>
                     </View>
                 </View>
             </TouchableOpacity>
@@ -62,8 +60,9 @@ const styles = StyleSheet.create({
         height: itemHeigh,
         alignItems: 'center',
         flexDirection: 'row',
-        borderBottomWidth: 0.3,
-        borderBottomColor: 'gray'
+        borderTopWidth: 0.3,
+        borderTopColor: 'gray',
+        backgroundColor:'#ede6e6'
     },
     image: {
         height: itemHeigh * 0.8,

@@ -22,7 +22,7 @@ const Navigator = createStackNavigator({
     navigationOptions: {
       title: "Chi tiết",
       headerStyle: {
-        backgroundColor: '#f6511e',
+        backgroundColor: 'green',
       },
       headerTintColor: '#fff',
       headerTitleStyle: {

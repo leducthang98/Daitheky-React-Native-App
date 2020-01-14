@@ -73,7 +73,7 @@ class InitDataSellSrceen extends React.Component {
                 </ScrollView>
                 <View style={styles.circleDiv}>
                     {images.filter(function (img) {
-                        if (img == "" || img == null) {
+                        if (img == "" || img == null|| img == undefined) {
                             return false;
                         }
                         return true;
@@ -104,7 +104,7 @@ class InitDataSellSrceen extends React.Component {
                     <Table borderStyle={{ borderWidth: 1 }}>
 
                         <TableWrapper style={styles.wrapperTable}>
-                            <Col data={tableInfoTitle} style={styles.titleTable} heightArr={[28, 28]} textStyle={styles.textTable1} />
+                            <Col data={tableInfoTitle} style={styles.titleTable} heightArr={[28,28]} textStyle={styles.textTable1} />
                             <Col data={tableInfoData} style={styles.titleData} heightArr={[28, 28]} textStyle={styles.textTable2} />
                         </TableWrapper>
                     </Table>
@@ -118,7 +118,7 @@ class InitDataSellSrceen extends React.Component {
 
 let styles = StyleSheet.create({
     container: {
-        backgroundColor: '#fafad2',
+        backgroundColor: '#ede6e6',
         width: width,
         height: height
     },
@@ -163,23 +163,23 @@ let styles = StyleSheet.create({
         flex: 1,
         padding: 16,
         paddingTop: 15,
-        backgroundColor: '#fafad2',
+        backgroundColor: '#ede6e6',
     },
     headTable: {
         height: 40,
-        backgroundColor: '#fafad2'
+        backgroundColor: '#ede6e6'
     },
     wrapperTable: {
         flexDirection: 'row'
     },
     titleTable: {
         flex: 0.65,
-        backgroundColor: '#fafad2',
+        backgroundColor: '#ede6e6',
 
     },
     titleData: {
         flex: 1,
-        backgroundColor: '#fafad2',
+        backgroundColor: '#ede6e6',
 
     },
     rowTable: {
@@ -193,7 +193,8 @@ let styles = StyleSheet.create({
     },
     textTable2: {
         marginLeft: 4,
-        textAlign: 'left'
+        textAlign:'left',
+        fontSize:12
     }
 
 

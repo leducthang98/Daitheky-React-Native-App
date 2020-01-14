@@ -2,11 +2,12 @@ import { put, takeEvery } from 'redux-saga/effects'
 import getSellData from '../fetchAPIs/getSellDataAPI'
 function* sellSagaFunction(action) {
     try {
-        let sellDataOrigin = yield getSellData();
-        let sellData =sellDataOrigin.dulieu
+        let sellDataOrigin = yield getSellData(action.payload);
+        let sellData = sellDataOrigin.dulieu
+        let countSellData = sellDataOrigin.sotin
         yield put({
             type: 'GET_SELLDATA_SUCCESS',
-            payload: { sellData }
+            payload: { sellData, countSellData }
         })
     } catch{
         yield put({

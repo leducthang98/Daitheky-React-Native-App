@@ -12,7 +12,8 @@ const MainTabNavigator = createBottomTabNavigator({
         navigationOptions: {
             tabBarLabel: "Mua/bán",
             tabBarIcon: ({ tintColor }) => (
-                <Icon name="dollar" size={26} color="#7B8184" />
+                <Icon name="home" size={26} color="green" />
+              
             )
         },
     },
@@ -21,7 +22,7 @@ const MainTabNavigator = createBottomTabNavigator({
         navigationOptions: {
             tabBarLabel: "Thuê",
             tabBarIcon: ({ tintColor }) => (
-                <Icon name="dollar" size={26} color="#7B8184" />
+                <Icon name="dollar" size={26} color="green" />
             )
         },
     },
@@ -30,7 +31,7 @@ const MainTabNavigator = createBottomTabNavigator({
         navigationOptions: {
             tabBarLabel: "Diễn đàn",
             tabBarIcon: ({ tintColor }) => (
-                <Icon name="bullhorn" size={26} color="#7B8184" />
+                <Icon name="bullhorn" size={26} color="green" />
             )
         },
     },
@@ -40,7 +41,7 @@ const MainTabNavigator = createBottomTabNavigator({
             tabBarLabel: "Tài khoản",
             tabBarIcon: ({ tintColor }) => (
 
-                <Icon name="user" size={26} color="#7B8184" />
+                <Icon name="user" size={26} color="green" />
             ),
 
         },
@@ -50,10 +51,10 @@ const MainTabNavigator = createBottomTabNavigator({
 },
     {
         tabBarOptions: {
-            activeTintColor: '#8DA1AE',
+            activeTintColor: 'green',
             inactiveTintColor: '#8DA1AE',
-            inactiveBackgroundColor: '#E6E6A5',
-            activeBackgroundColor: '#FCFCC8',
+            inactiveBackgroundColor: '#fafafe',
+            activeBackgroundColor: '#ede6e6',
 
 
 
