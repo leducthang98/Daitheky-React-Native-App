@@ -109,7 +109,7 @@ class InitDataSellSrceen extends React.Component {
                         </TableWrapper>
                     </Table>
                 </View>
-
+                    
                 <BottomView />
             </ScrollView >
         );
